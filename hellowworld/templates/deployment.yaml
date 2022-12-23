@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    labels: 
+      {{- $replica := .Values.replicacount }}
+      {{- $image := "nginx:1.16.0" }}
+      {{- with .Values.service }}
+      apps: nginx
+    name: nginx-deployment
+spec:
+  replicas: {{ $replica }}
+  selector:
+    matchLabels:
+      app: nginx
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+        - image: {{ $image}}
+          name: nginx
+          imagePullPolicy: IfNotPresent
+          {{- end }}
+          env:
+            {{- if eq .Values.envvalue "false" }}
+            - name: demo_env
+              value: "demo_value"
+              {{- end }}
