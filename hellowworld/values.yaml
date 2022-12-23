@@ -1,0 +1,77 @@
+type: Namespace
+namespaces:
+  - name: firstnamespace
+  - name: secondnamespace
+name: firstnamespace
+labels:
+  name: demo-a
+kind: Pod
+podname: nginx-helmpod
+containername: nginx-container
+image: "nginx:1.16.0"
+
+configname: nginx-configmap
+volumes:
+  path: /usr/share/nginx/html
+  name: nginx-path
+
+service:
+  type: NodePort
+  labels:
+    app: nginx
+  port: 80
+  protocol: TCP
+  targetPort: 80
+  externalTrafficPolicy: Cluster
+  nginxport:
+    enabled: true
+  python:
+    enabled: true
+
+envvalue: "false"
+replicacount: 2
+
+ports:
+  http:
+    name: http
+    port: 80
+    protocol: TCP
+    targetPort: 80
+  https:
+    name: https
+    port: 443
+    protocol: TCP
+    targetPort: 443
+
+netowrkname: hellowworldnetwork
+
+createsecret: true
+
+extra:
+  secret: []
+
+secret:
+  creds:
+    secretid: "randomsecretid"
+    secretidtwo: "simple"
+
+secretflag: create
+k8s:
+  secret:
+    id: "someid"
+    cred: "somecredential"
+
+secret1:
+  secret2:
+    secret3:
+      bloackkey:
+        fromstring:
+          active:
+            secretName:
+            key:
+      haskey:
+        fromstring:
+          active: 
+        fromSecret:
+          secretName:
+          key:

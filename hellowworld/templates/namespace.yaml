@@ -1,0 +1,12 @@
+kind: {{ .Values.type }}
+{{- range $namespace := .Values.namespaces }}
+apiVersion: v1
+metadata:
+    name: {{ $namespace.name }}
+    {{- end }}
+    labels:
+        name: {{ .Values.labels.name }}
+        newname: demo-b
+        newlable: demo-c
+        {{- template "mycharts.labels" }}
+

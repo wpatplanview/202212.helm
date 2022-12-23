@@ -1,0 +1,21 @@
+kind: NetworkPolicy
+apiVersion: networking.k8s.io/v1
+metadata:
+    name: {{ .Values.netowrkname }}-policy
+spec:
+    podSelector:
+        matchLabels:
+            app: nginx
+    ingress:
+        - ports:
+            - port: 9000
+              protocol: TCP
+        {{- if .Values.service.nginxport.enabled }}
+            - port: 9091
+              protocol: TCP
+              {{end}}
+        {{- if .Values.service.python.enabled }}
+            - port: 9092
+              protocol: TCP
+              {{end}}
+            
